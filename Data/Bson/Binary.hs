@@ -171,8 +171,7 @@ getDocument = do
    else (:) <$> getField <*> getFields
 
 putArray :: [Value] -> Put
-putArray vs = putDocument (zipWith f [0..] vs)
-  where f i v = (T.pack $! show i) := v
+putArray vs = putDocument (map (T.empty :=) vs)
 
 getArray :: Get [Value]
 getArray = map value <$> getDocument
